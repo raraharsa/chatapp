@@ -14,6 +14,8 @@ if (!isset($_SESSION['id'])) {
     $stmt = $pdo->prepare("SELECT * FROM tbusers WHERE id = :id");
     $stmt->execute(['id' => $_SESSION['id']]);
     $resultuser = $stmt->fetch();
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
