@@ -29,7 +29,7 @@ if (!isset($_SESSION['id'])) {
 <body>
 
 <!-- Konten dashboard chat akan ditambahkan di sini -->
-
+<h1>COBA INDEX</h1>
 </body>
 </html>
 <?php 
