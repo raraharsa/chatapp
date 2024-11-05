@@ -12,7 +12,7 @@ if (isset($_POST['btn'])) {
     $resultuser = $stmt->fetch();
 
     if ($resultuser) {
-        $_SESSION['id'] = $resultuser['id']; // Simpan ID pengguna di session
+        $_SESSION['user_id'] = $resultuser['id']; // Simpan ID pengguna di session
         header('Location: index.php'); // Alihkan ke dashboard
         exit;
     } else {
