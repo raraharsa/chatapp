@@ -64,7 +64,7 @@ if (isset($_POST['btn'])) {
                 <?php echo $error_message; ?>
             </div>
             <div class="text-center">
-                <p>Belum punya akun? <a href="user.php" class="btn btn-link">Daftar Akun</a></p>
+                <p>Belum punya akun? <a href="modul/user.php" class="btn btn-link">Daftar Akun</a></p>
             </div>
         <?php endif; ?>
     </form>
