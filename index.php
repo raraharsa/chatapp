@@ -1,21 +1,14 @@
+
+
 <?php
 session_start();
-date_default_timezone_set('Asia/Jakarta');
 
 include "lib/koneksi.php";
-
-// Cek apakah pengguna sudah login atau belum
-if (!isset($_SESSION['id'])) {
-    // Alihkan pengguna ke halaman login
+if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
-    exit(); // Pastikan untuk menghentikan eksekusi script setelah pengalihan
-} else {
-    // Mendapatkan data pengguna dari database berdasarkan session ID
-    $stmt = $pdo->prepare("SELECT * FROM tbusers WHERE id = :id");
-    $stmt->execute(['id' => $_SESSION['id']]);
-    $resultuser = $stmt->fetch();
-
-
+    exit(); 
+}
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,9 +24,6 @@ if (!isset($_SESSION['id'])) {
 <body>
 
 <!-- Konten dashboard chat akan ditambahkan di sini -->
-<h1>COBA INDEX</h1>
+
 </body>
 </html>
-<?php 
-} 
-?>
