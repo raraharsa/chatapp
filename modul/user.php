@@ -1,4 +1,4 @@
-<?php
+//<?php
 require '../lib/koneksi.php'; // Pastikan file koneksi tersedia di direktori yang benar
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php endif; ?>
 
         <div class="text-center">
-            <p>Sudah punya akun? <a href="login.php" class="btn btn-link">Login</a></p>
+            <p>Sudah punya akun? <a href="index.php" class="btn btn-link">Login</a></p>
         </div>
     </form>
 </div>

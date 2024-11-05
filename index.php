@@ -8,7 +8,7 @@ include "lib/koneksi.php";
 if (!isset($_SESSION['id'])) {
     // Alihkan pengguna ke halaman login
     header("Location: login.php");
-    exit;
+    exit(); // Pastikan untuk menghentikan eksekusi script setelah pengalihan
 } else {
     // Mendapatkan data pengguna dari database berdasarkan session ID
     $stmt = $pdo->prepare("SELECT * FROM tbusers WHERE id = :id");
