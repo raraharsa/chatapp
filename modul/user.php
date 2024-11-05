@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Masukkan data ke tabel tbusers
         $stmt = $pdo->prepare("INSERT INTO tbusers (username, email) VALUES (?, ?)");
         $stmt->execute([$username, $email]);
-        header("Location: ../login.php"); // Alihkan ke halaman login setelah pendaftaran
+        header("Location: default.php"); // Alihkan ke halaman login setelah pendaftaran
         exit;
     }
 }

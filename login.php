@@ -13,7 +13,7 @@ if (isset($_POST['btn'])) {
 
     if ($resultuser) {
         $_SESSION['user_id'] = $resultuser['id']; // Simpan ID pengguna di session
-        header('Location: index.php'); // Alihkan ke dashboard
+        header('Location: modul/default.php'); // Alihkan ke dashboard
         exit;
     } else {
         $error_message = "Login gagal! Username atau email salah.";
