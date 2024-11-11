@@ -1,13 +1,14 @@
 
-
 <?php
 session_start();
 
 include "lib/koneksi.php";
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit(); 
-}
+    include "login.php";
+}else {
+    $sqlUser  = $pdo->prepare("SELECT * FROM tbusers WHERE id = ?");
+    $sqlUser ->execute([$_SESSION['user_id']]);
+   
  
 ?>
 <!DOCTYPE html>
@@ -22,8 +23,23 @@ if (!isset($_SESSION['user_id'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<h1>WEHH UDH BISA INDEXX</h1>
-<!-- Konten dashboard chat akan ditambahkan di sini -->
 
+<?php
+$page = ($_GET['page'])?$_GET['page']:null;
+if (isset($page)){
+  if ($page=='logout') {
+    include "modul/logout.php";
+  }
+
+  
+} else{
+    include "modul/default.php";
+  }
+
+?>
 </body>
+
 </html>
+<?php
+}
+?>

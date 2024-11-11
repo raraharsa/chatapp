@@ -2,26 +2,36 @@
 session_start();
 include "lib/koneksi.php"; // Pastikan koneksi tersedia di sini
 
-if (isset($_POST['btn'])) {
-    $username = $_POST['username'];
+// Jika sudah login, alihkan ke halaman utama
+if (isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
 
-    // Query untuk mengecek username dan email
-    $stmt = $pdo->prepare("SELECT * FROM tbusers WHERE username = :username AND email = :email");
-    $stmt->execute(['username' => $username, 'email' => $email]);
-    $resultuser = $stmt->fetch();
+    // Cari pengguna berdasarkan email
+    $stmt = $pdo->prepare("SELECT * FROM tbusers WHERE email = ?");
+    $stmt->execute([$email]);
+    $user = $stmt->fetch();
+    
 
-    if ($resultuser) {
-        $_SESSION['user_id'] = $resultuser['id']; // Simpan ID pengguna di session
-        header('Location: modul/default.php'); // Alihkan ke dashboard
-        exit;
+    // Jika pengguna ditemukan, simpan ke session dan arahkan ke halaman utama
+    if ($user) {
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username']; // Simpan session username
+        
+        header("Location: index.php"); // Arahkan ke halaman utama setelah login berhasil
+        exit();
     } else {
-        $error_message = "Login gagal! Username atau email salah.";
+        // Error message jika email tidak ditemukan
+        $error_message = "Wah, kamu belum daftar akun nih!";
     }
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,11 +58,6 @@ if (isset($_POST['btn'])) {
     <h2 class="text-center">Login</h2>
     <form method="POST">
         <div class="form-outline mb-4">
-            <label class="form-label">Masukkan Username:</label>
-            <input type="text" class="form-control" name="username" required />
-        </div>
-
-        <div class="form-outline mb-4">
             <label class="form-label">Masukkan Email:</label>
             <input type="email" class="form-control" name="email" required />
         </div>
@@ -63,10 +68,11 @@ if (isset($_POST['btn'])) {
             <div class="alert alert-danger" role="alert">
                 <?php echo $error_message; ?>
             </div>
-            <div class="text-center">
-                <p>Belum punya akun? <a href="modul/user.php" class="btn btn-link">Daftar Akun</a></p>
-            </div>
         <?php endif; ?>
+
+        <div class="text-center">
+            <p>Belum punya akun? <a href="modul/user.php" class="btn btn-link">Daftar Akun</a></p>
+        </div>
     </form>
 </div>
 

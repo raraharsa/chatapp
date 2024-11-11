@@ -1,5 +1,5 @@
-//<?php
-require '../lib/koneksi.php'; // Pastikan file koneksi tersedia di direktori yang benar
+<?php
+include '../lib/koneksi.php'; // Pastikan file koneksi tersedia di direktori yang benar
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Masukkan data ke tabel tbusers
         $stmt = $pdo->prepare("INSERT INTO tbusers (username, email) VALUES (?, ?)");
         $stmt->execute([$username, $email]);
-        header("Location: default.php"); // Alihkan ke halaman login setelah pendaftaran
+        header("Location: ../login.php"); // Alihkan ke halaman login setelah pendaftaran
         exit;
     }
 }
@@ -67,9 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         <?php endif; ?>
 
-        <div class="text-center">
-            <p>Sudah punya akun? <a href="index.php" class="btn btn-link">Login</a></p>
-        </div>
+        
     </form>
 </div>
 
